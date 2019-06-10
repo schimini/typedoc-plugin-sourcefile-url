@@ -16,11 +16,13 @@
     "bitbucket",
     "gitlab"
   ],
+  "dependecies": {
+    "node-current-branch": "^1.0.1",
+  },
   "peerDependencies": {
     "typedoc": ">=0.14.0"
   },
   "devDependencies": {
-    "node-current-branch": "^1.0.1",
     "typedoc": "^0.14.0",
     "typescript": "^3.3.0"
   },
