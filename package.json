@@ -17,7 +17,7 @@
     "gitlab"
   ],
   "dependecies": {
-    "node-current-branch": "^1.0.1",
+    "node-current-branch": "^1.0.1"
   },
   "peerDependencies": {
     "typedoc": ">=0.14.0"
