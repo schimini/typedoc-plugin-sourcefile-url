@@ -7,7 +7,7 @@
   "bugs": "https://github.com/gdelmas/typedoc-plugin-sourcefile-url/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gdelmas/typedoc-plugin-sourcefile-url.git"
+    "url": "https://github.com/schimini/typedoc-plugin-sourcefile-url.git"
   },
   "license": "MIT",
   "keywords": [
