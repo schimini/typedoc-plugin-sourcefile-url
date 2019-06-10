@@ -36,6 +36,7 @@ The `your-sourcefile-map.json` structure is:
       {
         "pattern": "^modules/module-one",
         "replace": "https://www.your-repository.org/module-one/"
+        "onlyTitle": true
       },     
       {
         "pattern": "^",
@@ -46,6 +47,8 @@ The `your-sourcefile-map.json` structure is:
 `pattern` is a regular expression (without enclosing slashes). Each *Defined in* statement is matched against the `pattern`. On match the `pattern` is replaced with the string from `replace` to create the URL.
 
 There can be one or more mapping rules. For each *Defined in* only the first rule that matches is applied. In the above example the last rule would match all source files that did not start with `modules/module-one`. This compares to the *Simple Prefix* option.
+
+If `onlyTitle` is true, the pattern will also apply to file names
 
 ---
 
