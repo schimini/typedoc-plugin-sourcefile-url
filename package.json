@@ -30,7 +30,7 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
-	"postinstall": "npm install node-current-branch"
+	"postinstall": "npm install node-current-branch",
     "prepublishOnly": "npm run build"
   }
 }
