@@ -26,6 +26,7 @@
   },
   "main": "dist/main.js",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   }
