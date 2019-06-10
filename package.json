@@ -28,7 +28,7 @@
   },
   "main": "dist/main.js",
   "scripts": {
-    "prepare": "npm run build",
+    "prepare": "npm install node-current-branch && npm run build",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   }
