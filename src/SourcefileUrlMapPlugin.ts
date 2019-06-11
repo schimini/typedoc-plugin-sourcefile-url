@@ -6,7 +6,6 @@ import {Component} from 'typedoc/dist/lib/utils/component'
 import {ConverterComponent} from 'typedoc/dist/lib/converter/components'
 import {Converter} from 'typedoc/dist/lib/converter/converter'
 import {Context} from 'typedoc/dist/lib/converter/context'
-import {SourceReference} from 'typedoc/dist/lib/models/sources/file'
 import {Options} from 'typedoc/dist/lib/utils/options/options'
 
 interface Mapping {
@@ -26,7 +25,11 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
     }
 
     private onBegin(): void {
-        this.branchName = branch();
+        if (branch) {
+            this.branchName = branch();
+        } else {
+            console.info('typedoc-plugin-sourcefile-url: node-current-branch not installed.')
+        }
         // read options parameter
         const options: Options = this.application.options
         const mapRelativePath = options.getValue('sourcefile-url-map')
@@ -89,7 +92,7 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
 
                 this.mappings.push({
                     pattern: regExp as RegExp,
-                    replace: (mappingJson['replace'] as string).replace("<branch_name>", this.branchName),
+                    replace: (mappingJson['replace'] as string).replace("<branch_name>/", this.branchName),
                     onlyTitle: mappingJson['onlyTitle'] ? mappingJson : false
                 })
             } else {
