@@ -16,11 +16,9 @@
     "bitbucket",
     "gitlab"
   ],
-  "dependecies": {
-    "node-current-branch": "^1.0.1"
-  },
   "peerDependencies": {
-    "typedoc": ">=0.14.0"
+    "typedoc": ">=0.14.0",
+	"node-current-branch": ">=1.0.1"
   },
   "devDependencies": {
     "typedoc": "^0.14.0",
@@ -30,7 +28,6 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "tsc",
-	"postinstall": "npm install node-current-branch",
     "prepublishOnly": "npm run build"
   }
 }

@@ -122,6 +122,9 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
                             } else {
                                 o = source.url;
                                 source.url = (source.url ? source.url : source.fileName).replace(mapping.pattern, mapping.replace);
+                                if (source.file && source.file.url) {
+                                    source.url = source.file.url + '#L' + source.line
+                                }
                                 n = source.url
                             }
                             if (o != n)
@@ -129,18 +132,6 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
                         }
                     }
                 }
-            }
-        }
-        // add line anchors
-        for (let key in project.reflections) {
-            const reflection = project.reflections[key]
-
-            if (reflection.sources) {
-                reflection.sources.forEach((source: SourceReference) => {
-                    if (source.file && source.file.url) {
-                        source.url = source.file.url + '#L' + source.line
-                    }
-                })
             }
         }
     }
