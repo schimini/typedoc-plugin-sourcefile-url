@@ -26,8 +26,8 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
     private onBegin(): void {
         try {
             const branch = require("node-current-branch");
-            this.branchName = branch();
-        } catch(e) {
+            this.branchName = branch() + "/";
+        } catch (e) {
             console.info('typedoc-plugin-sourcefile-url: node-current-branch not installed.')
         }
         // read options parameter
@@ -110,28 +110,23 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
 
 
         let reflection;
-        let o;
-        let n;
+        let toBreak = false;
         for (let reflectionsKey in project.reflections) {
             reflection = project.reflections[reflectionsKey];
             if (reflection.sources) {
                 for (let source of reflection.sources) {
                     for (const mapping of this.mappings) {
+                        toBreak = false;
                         if (source) {
                             if (mapping.onlyTitle) {
-                                o = source.fileName;
-                                source.fileName = source.fileName.replace(mapping.pattern, mapping.replace)
-                                n = source.fileName;
+                                if (source.fileName.match(mapping.pattern)) toBreak = true;
+                                source.fileName = source.fileName.replace(mapping.pattern, mapping.replace);
                             } else {
-                                o = source.url;
-                                source.url = (source.url ? source.url : source.fileName).replace(mapping.pattern, mapping.replace);
-                                if (source.file && source.file.url) {
-                                    source.url = source.file.url + '#L' + source.line
-                                }
-                                n = source.url
+                                if ((source.url ? source.url : source.fileName).match(mapping.pattern)) toBreak = true;
+                                source.url = `${(source.url ? source.url : source.fileName)
+                                    .replace(mapping.pattern, mapping.replace)}#L${source.line}`;
                             }
-                            if (o != n)
-                                break;
+                            if (toBreak) break;
                         }
                     }
                 }
