@@ -1,7 +1,6 @@
 import * as Path from 'path'
 import * as FS from 'fs-extra'
-// @ts-ignore
-import * as branch from "node-current-branch";
+
 import {Component} from 'typedoc/dist/lib/utils/component'
 import {ConverterComponent} from 'typedoc/dist/lib/converter/components'
 import {Converter} from 'typedoc/dist/lib/converter/converter'
@@ -25,9 +24,10 @@ export class SourcefileUrlMapPlugin extends ConverterComponent {
     }
 
     private onBegin(): void {
-        if (branch) {
+        try {
+            const branch = require("node-current-branch");
             this.branchName = branch();
-        } else {
+        } catch(e) {
             console.info('typedoc-plugin-sourcefile-url: node-current-branch not installed.')
         }
         // read options parameter
